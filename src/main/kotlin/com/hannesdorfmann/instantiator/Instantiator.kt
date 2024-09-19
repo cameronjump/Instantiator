@@ -32,15 +32,15 @@ private val wildcardTripleNullType =
 class Instantiator(private val config: InstantiatorConfig) {
 
     private fun fillList(genericsType: KType): List<Any?> {
-        return (1..10).map { createInstance(genericsType) as Any? }.toMutableList()
+        return (1..config.numberOfItemsToFull).map { createInstance(genericsType) as Any? }.toMutableList()
     }
 
     private fun fillSet(genericsType: KType): Set<Any?> {
-        return (1..10).map { createInstance(genericsType) as Any? }.toMutableSet()
+        return (1..config.numberOfItemsToFull).map { createInstance(genericsType) as Any? }.toMutableSet()
     }
 
     private fun fillMap(keyGenericsType: KType, valueGenericsType: KType): Map<Any?, Any?> {
-        return (1..10).associate { createInstance(keyGenericsType) as Any? to createInstance(valueGenericsType) as Any? }
+        return (1..config.numberOfItemsToFull).associate { createInstance(keyGenericsType) as Any? to createInstance(valueGenericsType) as Any? }
             .toMutableMap()
     }
 

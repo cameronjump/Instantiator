@@ -157,6 +157,7 @@ class InstantiatorConfig(
     val useDefaultArguments: Boolean = true,
     val useNull: Boolean = true,
     val random: Random = Random,
+    val numberOfItemsToFull: Int = 10,
     vararg factories: InstanceFactory = DEFAULT_INSTANCE_FACTORIES
 ) {
 

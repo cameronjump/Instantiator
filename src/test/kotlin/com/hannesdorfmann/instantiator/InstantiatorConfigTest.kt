@@ -91,6 +91,30 @@ class InstantiatorConfigTest {
     }
 
     @Test
+    internal fun `setting numberOfItemsToFill fills that many`() {
+        val numberOfItemsToFill = 2
+        val config = InstantiatorConfig(useNull = false, numberOfItemsToFull = numberOfItemsToFill)
+
+        val instance = instance<ClassWithListSetMap>(config)
+
+        assertEquals(numberOfItemsToFill, instance.list.size)
+        assertEquals(numberOfItemsToFill, instance.map.size)
+        assertEquals(numberOfItemsToFill, instance.set.size)
+    }
+
+    @Test
+    internal fun `numberOfItemsToFill default fills ten`() {
+        val numberOfItemsToFill = 10
+        val config = InstantiatorConfig(useNull = false)
+
+        val instance = instance<ClassWithListSetMap>(config)
+
+        assertEquals(numberOfItemsToFill, instance.list.size)
+        assertEquals(numberOfItemsToFill, instance.map.size)
+        assertEquals(numberOfItemsToFill, instance.set.size)
+    }
+
+    @Test
     fun `toNullableInstanceFactory() with mode=ALWAYS_NULL return always null`() {
         val nullableIntFactory = IntFactory().toNullableInstanceFactory(
             mode = ToNullableInstanceFactoryMode.ALWAYS_NULL
@@ -176,6 +200,8 @@ class InstantiatorConfigTest {
     )
 
     data class ClassWithDefaults(val i: Int, val s: String = "someString")
+
+    data class ClassWithListSetMap(val list : List<Int>, val set: Set<Int>, val map: Map<Int, Int>)
 
     interface TestInterface {}
 }
